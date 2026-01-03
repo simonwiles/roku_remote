@@ -183,7 +183,7 @@ body {
 .nav-button:active,
 .volume-button:active {
   transform: translateY(0);
-  background: var(--highlight-high);
+  background: var(--pine);
 }
 
 .navigation-cluster {

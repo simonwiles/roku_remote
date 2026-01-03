@@ -39,10 +39,6 @@ function scanDevices() {
 
 function sendCommand(command) {
   const ip = document.getElementById("ipAddress").textContent;
-  const button = event.currentTarget;
-  const originalBackground = button.style.backgroundColor;
-
-  button.style.backgroundColor = "var(--pine)";
 
   fetch("/command", {
     method: "POST",
@@ -59,14 +55,10 @@ function sendCommand(command) {
       if (data.status === "error") {
         showToast("Error: " + data.message);
       }
-      setTimeout(() => {
-        button.style.backgroundColor = originalBackground;
-      }, 200);
     })
     .catch((error) => {
       console.error("Error:", error);
       showToast("Failed to send command");
-      button.style.backgroundColor = originalBackground;
     });
 }
 
