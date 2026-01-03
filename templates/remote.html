@@ -21,10 +21,10 @@
   <div class="remote-grid">
     <!-- Top Row Buttons -->
     <div class="button-row">
-      <button class="control-button" onclick="sendCommand('back')">
+      <button class="control-button cmd-back" onclick="sendCommand('back')">
         <i class="fas fa-arrow-left"></i>
       </button>
-      <button class="control-button" onclick="sendCommand('home')">
+      <button class="control-button cmd-home" onclick="sendCommand('home')">
         <i class="fas fa-home"></i>
       </button>
     </div>
@@ -50,26 +50,32 @@
 
     <!-- Playback Controls -->
     <div class="button-row">
-      <button class="control-button" onclick="sendCommand('reverse')">
+      <button class="control-button ctl-rev" onclick="sendCommand('reverse')">
         <i class="fas fa-backward"></i>
       </button>
-      <button class="control-button" onclick="sendCommand('play')">
+      <button class="control-button ctl-play" onclick="sendCommand('play')">
         <i class="fas fa-play"></i>
       </button>
-      <button class="control-button" onclick="sendCommand('forward')">
+      <button class="control-button ctl-fwd" onclick="sendCommand('forward')">
         <i class="fas fa-forward"></i>
       </button>
     </div>
 
     <!-- Volume Controls -->
     <div class="volume-row">
-      <button class="volume-button" onclick="sendCommand('volume_down')">
+      <button
+        class="volume-button vol-down"
+        onclick="sendCommand('volume_down')"
+      >
         <i class="fas fa-volume-down"></i>
       </button>
-      <button class="volume-button" onclick="sendCommand('volume_mute')">
+      <button
+        class="volume-button vol-mute"
+        onclick="sendCommand('volume_mute')"
+      >
         <i class="fas fa-volume-mute"></i>
       </button>
-      <button class="volume-button" onclick="sendCommand('volume_up')">
+      <button class="volume-button vol-up" onclick="sendCommand('volume_up')">
         <i class="fas fa-volume-up"></i>
       </button>
     </div>

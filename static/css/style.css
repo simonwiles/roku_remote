@@ -181,7 +181,10 @@ body {
 
 .control-button:active,
 .nav-button:active,
-.volume-button:active {
+.volume-button:active,
+.control-button.active,
+.nav-button.active,
+.volume-button.active {
   transform: translateY(0);
   background: var(--pine);
 }

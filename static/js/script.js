@@ -111,6 +111,83 @@ function launchApp(appId) {
     .catch((error) => console.error("Error:", error));
 }
 
+function pulse(elementOrSelector) {
+  const element =
+    typeof elementOrSelector === "string"
+      ? document.querySelector(elementOrSelector)
+      : elementOrSelector;
+  element.classList.add("active");
+  setTimeout(() => {
+    element.classList.remove("active");
+  }, 200);
+}
+
+document.addEventListener("keydown", (event) => {
+  console.log(event.key);
+  switch (event.key) {
+    case "ArrowUp":
+      sendCommand("up");
+      pulse(".nav-up");
+      break;
+    case "ArrowDown":
+      sendCommand("down");
+      pulse(".nav-down");
+      break;
+    case "ArrowLeft":
+      sendCommand("left");
+      pulse(".nav-left");
+      break;
+    case "ArrowRight":
+      sendCommand("right");
+      pulse(".nav-right");
+      break;
+    case "Enter":
+      sendCommand("select");
+      pulse(".nav-ok");
+      break;
+
+    case "Backspace":
+      sendCommand("back");
+      pulse(".cmd-back");
+      break;
+    case "Home":
+      sendCommand("home");
+      pulse(".cmd-home");
+      break;
+
+    case "PageUp":
+    case ",":
+    case "<":
+      sendCommand("reverse");
+      pulse(".ctl-rev");
+      break;
+    case "Space":
+      sendCommand("play");
+      pulse(".ctl-play");
+      break;
+    case "PageDown":
+    case ".":
+    case ">":
+      sendCommand("forward");
+      pulse(".ctl-fwd");
+      break;
+
+    case "=":
+    case "+":
+      sendCommand("volume_up");
+      pulse(".vol-up");
+      break;
+    case "-":
+      sendCommand("volume_down");
+      pulse(".vol-down");
+      break;
+    case "\\":
+      sendCommand("volume_mute");
+      pulse(".vol-mute");
+      break;
+  }
+});
+
 // Load apps when the remote page loads
 document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("apps-container")) {
