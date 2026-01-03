@@ -1,22 +1,9 @@
-FROM python:3.9-slim
+FROM python:3.12-slim-trixie
+COPY --from=docker.io/astral/uv:latest /uv /uvx /bin/
 
-WORKDIR /app
+WORKDIR /opt/roku-remote
+COPY . /opt/roku-remote
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    net-tools \
-    iputils-ping \
-    && rm -rf /var/lib/apt/lists/*
+RUN uv sync
 
-# Copy requirements first to leverage Docker cache
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
-COPY . .
-
-# Expose port 5000
-EXPOSE 5000
-
-# Run the application with host network access
-CMD ["python", "roku_remote.py"]
+CMD ["uv", "run", "python", "roku_remote.py"]
