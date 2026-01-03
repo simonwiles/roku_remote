@@ -38,15 +38,13 @@ function scanDevices() {
 }
 
 function sendCommand(command) {
-  const ip = document.getElementById("ipAddress").textContent;
-
   fetch("/command", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      ip: ip,
+      ip: ipAddress,
       command: command,
     }),
   })
@@ -75,16 +73,15 @@ function showToast(message) {
 
 function loadApps() {
   const appsContainer = document.getElementById("apps-container");
-  const ip = document.getElementById("ipAddress").textContent;
 
-  fetch(`/apps/${ip}`)
+  fetch(`/apps/${ipAddress}`)
     .then((response) => response.json())
     .then((apps) => {
       appsContainer.innerHTML = "";
       apps.forEach((app) => {
         const button = document.createElement("button");
         button.className = "app-button";
-        button.onclick = () => launchApp(app.id);
+        button.onclick = () => launchApp(app.id, ipAddress);
         button.innerHTML = `
                     <img src="${app.icon_url}" alt="${app.name}" onerror="this.src='/static/images/app-placeholder.png'">
                     <span>${app.name}</span>
@@ -104,8 +101,7 @@ function loadApps() {
 }
 
 function launchApp(appId) {
-  const ip = document.getElementById("ipAddress").textContent;
-  fetch(`/launch/${ip}/${appId}`)
+  fetch(`/launch/${ipAddress}/${appId}`)
     .then((response) => response.json())
     .then((data) => {
       if (data.status === "error") {

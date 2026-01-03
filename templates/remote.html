@@ -3,6 +3,10 @@
 {% block title %}Roku Remote Control{% endblock %}
 {% block content %}
 
+<script>
+  const ipAddress = "{{ip}}";
+</script>
+
 <div class="back-button">
   <button onclick="window.location.href='/'">
     <i class="fas fa-arrow-left"></i> Back to Devices
@@ -10,7 +14,7 @@
 </div>
 
 <div class="remote-status">
-  <i class="fas fa-wifi"></i> Connected to: <span id="ipAddress">{{ip}}</span>
+  <i class="fas fa-wifi"></i> Connected to: {{ip}}
 </div>
 
 <div class="remote-container">
@@ -78,26 +82,5 @@
     </div>
   </div>
 </div>
-<script>
-  function sendCommand(command) {
-    const ip = document.getElementById("ipAddress").textContent;
-    fetch("/command", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ip: ip, command: command }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "error") {
-          alert("Error: " + data.message);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Failed to send command");
-      });
-  }
-</script>
+
 {% endblock %}
