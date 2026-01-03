@@ -3,17 +3,17 @@
 {% block title %}Roku Remote Control{% endblock %}
 {% block content %}
 
+<div class="back-button">
+  <button onclick="window.location.href='/'">
+    <i class="fas fa-arrow-left"></i> Back to Devices
+  </button>
+</div>
+
+<div class="remote-status">
+  <i class="fas fa-wifi"></i> Connected to: <span id="ipAddress">{{ip}}</span>
+</div>
+
 <div class="remote-container">
-  <div class="back-button">
-    <button onclick="window.location.href='/'">
-      <i class="fas fa-arrow-left"></i> Back to Devices
-    </button>
-  </div>
-
-  <div class="remote-status">
-    <i class="fas fa-wifi"></i> Connected to: <span id="ipAddress">{{ip}}</span>
-  </div>
-
   <div class="remote-grid">
     <!-- Top Row Buttons -->
     <div class="button-row">
@@ -86,10 +86,7 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        ip: ip,
-        command: command,
-      }),
+      body: JSON.stringify({ ip: ip, command: command }),
     })
       .then((response) => response.json())
       .then((data) => {
